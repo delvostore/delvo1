@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jablah Delivery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- شاشة البداية بالفيديو -->
+    <div id="splashScreen">
+      <video autoplay muted playsinline preload="auto">
+        <source src="video.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو
+      </video>
+    </div>
+
+    <style>
+      /* شاشة البداية */
+      #splashScreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        overflow: hidden;
+      }
+
+      #splashScreen video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* تأثير إخفاء الشاشة */
+      .hidden {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 1s ease, visibility 1s ease;
+      }
+    </style>
+
+    <script>
+      const splash = document.getElementById("splashScreen");
+      const video = splash.querySelector("video");
+
+      // بعد انتهاء الفيديو، اختفِ الشاشة
+      video.onended = () => {
+        splash.classList.add("hidden");
+        splash.addEventListener('transitionend', () => {
+          splash.style.display = 'none';
+        });
+      };
+
+      // fallback: اختفاء الشاشة بعد 5 ثواني كحد أقصى
+      setTimeout(() => {
+        if (!splash.classList.contains("hidden")) {
+          splash.classList.add("hidden");
+          splash.addEventListener('transitionend', () => {
+            splash.style.display = 'none';
+          });
+        }
+      }, 5000);
+    </script>
+
+    <div class="toast-message" id="toastMessage">
+        <i class="fas fa-check-circle"></i>
+        <span>تمت إضافة المنتج إلى السلة!</span>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="search-bar">
+        <div class="search-container">
+            <input id="searchInput" type="text" placeholder="الطعام، المشروبات، المطاعم، إلخ...">
+            <ul id="suggestionsList" class="search-suggestions"></ul>
+        </div>
+    </div>
+
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <img src="https://i.imgur.com/IQBlQwH.png" alt="Slide 1">
+            <img src="https://i.imgur.com/hR6XZSC.png" alt="Slide 2">
+        </div>
+        <div class="slider-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <div class="categories-rounded">
+        <div class="category" onclick="showCategory('snacks')">
+            <i class="fas fa-cookie-bite icon" style="background-color: #FFA726;"></i>
+            <span>سناكات</span>
+        </div>
+        <div class="category" onclick="showCategory('vegetables_fruits')">
+            <i class="fas fa-carrot icon" style="background-color: #66BB6A;"></i>
+            <span>خضروات <br>و فواكه</span>
+        </div>
+        <div class="category" onclick="showCategory('legumes')">
+            <i class="fas fa-leaf icon" style="background-color: #BA68C8;"></i>
+            <span>بقوليات</span>
+        </div>
+        <div class="category" onclick="showCategory('groceries')">
+            <i class="fas fa-cheese icon" style="background-color: #2196F3;"></i>
+            <span>غذائيات</span>
+        </div>
+    </div>
+
+    <div class="fast-food-card" onclick="showCategory('fast_food')">
+        <div class="fast-food-card-image">
+            <img src="https://i.imgur.com/u19c4m5.png" alt="Fast Food">
+        </div>
+        <div class="fast-food-card-details">
+            <div class="fast-food-card-title">
+                الوجبات السريعة
+            </div>
+            <div class="fast-food-card-subtitle">
+                كريسبي | بيتزا
+            </div>
+            <div class="fast-food-delivery-info">
+                <div class="delivery-time">
+                    <i class="fas fa-clock"></i>
+                    <span>45 د</span>
+                </div>
+                <div class="delivery-type">
+                    <i class="fas fa-motorcycle"></i>
+                    <span>توصيل سريع</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active" data-target="home"><i class="ti-home"></i>الرئيسية</a>
+        <a href="#" class="nav-item" data-target="favorites"><i class="ti-heart"></i>المفضلة</a>
+        <a href="#" class="nav-item" data-target="notifications"><i class="ti-bell"></i>التنبيهات</a>
+        <a href="#" class="nav-item" data-target="cart"><i class="ti-shopping-cart"></i>السلة</a>
+        <a href="#" class="nav-item" data-target="settings"><i class="ti-settings"></i>الإعدادات</a>
+    </div>
+
+    <!-- باقي صفحات الموقع كما هي بدون أي تغيير -->
+    <!-- … (ضع كل باقي الـ HTML كما أرسلته سابقًا هنا) … -->
+
+    <script src="script.js"></script>
+</body>
+</html>
