@@ -1,0 +1,35 @@
+/* ===== شاشة البداية (Splash Video) ===== */
+#splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+#splash video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* اخفاء المحتوى الأساسي لوقت الفيديو */
+#mainContent {
+    display: none;
+}
+
+/* مثال تنسيق بسيط للمحتوى الأساسي */
+#mainContent h1 {
+    text-align: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+}
+#mainContent p {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
